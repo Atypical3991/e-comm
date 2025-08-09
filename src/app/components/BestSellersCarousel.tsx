@@ -2,11 +2,11 @@
 
 export default function BestSellersCarousel() {
   const items = [
-    "https://via.placeholder.com/300x300?text=Best+Seller+1",
-    "https://via.placeholder.com/300x300?text=Best+Seller+2",
-    "https://via.placeholder.com/300x300?text=Best+Seller+3",
-    "https://via.placeholder.com/300x300?text=Best+Seller+4",
-    "https://via.placeholder.com/300x300?text=Best+Seller+5",
+    "https://picsum.photos/seed/1/600/600",
+    "https://picsum.photos/seed/2/600/600",
+    "https://picsum.photos/seed/3/600/600",
+    "https://picsum.photos/seed/4/600/600",
+    "https://picsum.photos/seed/5/600/600",
   ];
 
   return (

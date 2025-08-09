@@ -3,14 +3,14 @@
 export default function CasualWearSection() {
   // 8 images total
   const images = [
-    "https://via.placeholder.com/300x300?text=Casual+1",
-    "https://via.placeholder.com/300x300?text=Casual+2",
-    "https://via.placeholder.com/300x300?text=Casual+3",
-    "https://via.placeholder.com/300x300?text=Casual+4",
-    "https://via.placeholder.com/300x300?text=Casual+5",
-    "https://via.placeholder.com/300x300?text=Casual+6",
-    "https://via.placeholder.com/300x300?text=Casual+7",
-    "https://via.placeholder.com/300x300?text=Casual+8",
+    "https://picsum.photos/seed/6/600/600",
+    "https://picsum.photos/seed/7/600/600",
+    "https://picsum.photos/seed/8/600/600",
+    "https://picsum.photos/seed/9/600/600",
+    "https://picsum.photos/seed/10/600/600",
+    "https://picsum.photos/seed/11/600/600",
+    "https://picsum.photos/seed/12/600/600",
+    "https://picsum.photos/seed/13/600/600",
   ];
 
   // Split into 2 equal halves (4 images each)

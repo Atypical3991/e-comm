@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Layout from "./components/Layout";
-import Filters from "./components/Filters";
-import ProductCard, { Product } from "./components/ProductCard";
+import Layout from "../components/Layout";
+import Filters from "../components/Filters";
+import ProductCard, { Product } from "../components/ProductCard";
 
 const allProducts: Product[] = Array.from({ length: 50 }, (_, i) => ({
   id: i + 1,

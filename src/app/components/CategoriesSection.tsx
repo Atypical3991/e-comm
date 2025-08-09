@@ -4,16 +4,20 @@ export default function CategoriesSection() {
   const categories = [
     {
       name: "Earrings",
-      img: "https://via.placeholder.com/300x300?text=Earrings",
+      img: "https://picsum.photos/seed/23/600/600",
     },
     {
       name: "Bracelets",
-      img: "https://via.placeholder.com/300x300?text=Bracelets",
+      img: "https://picsum.photos/seed/24/600/600",
     },
-    { name: "Sets", img: "https://via.placeholder.com/300x300?text=Sets" },
+    { name: "Sets", img: "https://picsum.photos/seed/25/600/600" },
     {
       name: "Anklets",
-      img: "https://via.placeholder.com/300x300?text=Anklets",
+      img: "https://picsum.photos/seed/26/600/600",
+    },
+    {
+      name: "Necklaces",
+      img: "https://picsum.photos/seed/27/600/600",
     },
   ];
 

@@ -12,14 +12,14 @@ export default function NewArrivalsShowcase() {
           <div className="flex gap-4 h-1/2">
             <div className="w-1/2">
               <img
-                src="https://via.placeholder.com/300x300?text=Item+1"
+                src="https://picsum.photos/seed/13/600/600"
                 alt="Item 1"
                 className="w-full h-full object-cover rounded-lg shadow"
               />
             </div>
             <div className="w-1/2">
               <img
-                src="https://via.placeholder.com/300x300?text=Item+2"
+                src="https://picsum.photos/seed/14/600/600"
                 alt="Item 2"
                 className="w-full h-full object-cover rounded-lg shadow"
               />
@@ -30,14 +30,14 @@ export default function NewArrivalsShowcase() {
           <div className="flex gap-4 h-1/2">
             <div className="w-1/2">
               <img
-                src="https://via.placeholder.com/300x300?text=Item+3"
+                src="https://picsum.photos/seed/15/600/600"
                 alt="Item 3"
                 className="w-full h-full object-cover rounded-lg shadow"
               />
             </div>
             <div className="w-1/2">
               <img
-                src="https://via.placeholder.com/300x300?text=Item+4"
+                src="https://picsum.photos/seed/16/600/600"
                 alt="Item 4"
                 className="w-full h-full object-cover rounded-lg shadow"
               />
@@ -48,7 +48,7 @@ export default function NewArrivalsShowcase() {
         {/* Right Segment: Single large image */}
         <div className="w-1/2">
           <img
-            src="https://via.placeholder.com/600x600?text=Main+Item"
+            src="https://picsum.photos/seed/17/600/600"
             alt="Main Item"
             className="w-full h-full object-cover rounded-lg shadow"
           />
