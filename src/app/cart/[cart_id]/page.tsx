@@ -59,7 +59,7 @@ export default function CartPage() {
     <>
       <div className="p-6 grid grid-cols-1 md:grid-cols-[70%_30%] gap-8">
         {/* LEFT COLUMN - Cart */}
-        <div className="max-w-6xl">
+        <div className="max-w-7xl">
           <h1 className="text-2xl font-bold mb-6">Shopping Cart</h1>
 
           <div className="bg-white rounded-lg shadow-lg p-6 min-h-[500px] flex flex-col">
@@ -137,7 +137,7 @@ export default function CartPage() {
         </div>
 
         {/* RIGHT COLUMN - Best Sellers */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="bg-white rounded-lg shadow-lg p-6 max-w-2xl">
           <h2 className="text-xl font-bold mb-4">Best Sellers</h2>
           <div className="grid grid-cols-2 gap-4">
             {Array.from({ length: 4 }).map((_, idx) => (
