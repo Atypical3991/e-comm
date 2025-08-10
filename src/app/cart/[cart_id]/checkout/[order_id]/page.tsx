@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import RecommendationCarouselProps from "../components/RecommendationCarousel";
+import ProductRecommendationCarousel from "../components/RecommendationCarouselCheckout";
+import BestSellers from "../components/BestSellersCheckout";
 
 interface CartItem {
   id: number;
@@ -99,23 +100,9 @@ export default function OrderSummaryPage() {
 
         {/* RIGHT: Placeholder for Best Sellers / Offers */}
         {/* RIGHT COLUMN - Best Sellers */}
-        <div className="bg-white rounded-lg shadow-lg p-6 max-w-4xl">
-          <h2 className="text-xl font-bold mb-4">Best Sellers</h2>
-          <div className="grid grid-cols-4 gap-4">
-            {Array.from({ length: 8 }).map((_, idx) => (
-              <img
-                key={idx}
-                src={`https://picsum.photos/200?random=${idx + 10}`}
-                alt={`Best Seller ${idx + 1}`}
-                className="w-full h-full object-cover rounded-lg"
-              />
-            ))}
-          </div>
-        </div>
+        <BestSellers />
       </div>
-      <div className="max-w-8xl mx-auto p-6">
-        <RecommendationCarouselProps />
-      </div>
+      <ProductRecommendationCarousel />
     </>
   );
 }

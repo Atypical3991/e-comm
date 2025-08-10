@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 import Link from "next/link";
 import ProductRecommendationCarousel from "../components/RecommendationCarousel";
+import BestSellers from "../components/BestSellers";
 
 interface CartItem {
   id: number;
@@ -137,23 +138,9 @@ export default function CartPage() {
         </div>
 
         {/* RIGHT COLUMN - Best Sellers */}
-        <div className="bg-white rounded-lg shadow-lg p-6 max-w-2xl">
-          <h2 className="text-xl font-bold mb-4">Best Sellers</h2>
-          <div className="grid grid-cols-2 gap-4">
-            {Array.from({ length: 4 }).map((_, idx) => (
-              <img
-                key={idx}
-                src={`https://picsum.photos/200?random=${idx + 10}`}
-                alt={`Best Seller ${idx + 1}`}
-                className="w-full h-full object-cover rounded-lg"
-              />
-            ))}
-          </div>
-        </div>
+        <BestSellers />
       </div>
-      <div className="max-w-8xl mx-auto p-6">
-        <ProductRecommendationCarousel />
-      </div>
+      <ProductRecommendationCarousel />
     </>
   );
 }
