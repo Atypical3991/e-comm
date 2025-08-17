@@ -2,10 +2,16 @@
 
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import ProfileSection from "./ProfileSection";
+import { useState } from "react";
 
 export default function Header() {
+  const { data: session } = useSession();
+  const [showProfile, setShowProfile] = useState(false);
+
   return (
-    <header className="bg-gray-800 text-white px-6 py-4 shadow-md">
+    <header className="bg-gray-800 text-white px-6 py-4 shadow-md relative">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* LEFT: Title + Nav links */}
         <div className="flex items-center gap-8">
@@ -31,7 +37,7 @@ export default function Header() {
         </div>
 
         {/* RIGHT: Search + Cart + Profile */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 relative">
           <input
             type="text"
             placeholder="Search..."
@@ -47,8 +53,22 @@ export default function Header() {
             </span>
           </div>
 
-          {/* Profile Icon */}
-          <FaUserCircle className="text-2xl cursor-pointer" />
+          {/* Profile */}
+          {!session ? (
+            <Link href="/auth/login">
+              <FaUserCircle className="text-2xl cursor-pointer" />
+            </Link>
+          ) : (
+            <div className="relative">
+              <FaUserCircle
+                className="text-2xl cursor-pointer"
+                onClick={() => setShowProfile((prev) => !prev)}
+              />
+              {showProfile && (
+                <ProfileSection onClose={() => setShowProfile(false)} />
+              )}
+            </div>
+          )}
         </div>
       </div>
     </header>
