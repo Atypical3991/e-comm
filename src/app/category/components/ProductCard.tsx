@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export interface Product {
   id: number;
   name: string;
@@ -12,14 +14,17 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="border rounded-lg p-4 shadow-sm hover:shadow-md transition h-full flex flex-col">
-      {/* Image: full card width, square (height == width) */}
-      <div className="w-full aspect-square mb-3 overflow-hidden rounded">
+      {/* Image: wrapped in Link */}
+      <Link
+        href={`/product/${product.id}`}
+        className="w-full aspect-square mb-3 overflow-hidden rounded block"
+      >
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover hover:scale-105 transition-transform"
         />
-      </div>
+      </Link>
 
       {/* Product info */}
       <div className="mt-auto">

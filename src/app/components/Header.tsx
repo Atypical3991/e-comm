@@ -18,19 +18,19 @@ export default function Header() {
           <div className="text-xl font-bold">JewelryShop</div>
 
           <nav className="hidden md:flex gap-6 text-sm font-medium">
-            <Link href="#" className="hover:text-gray-300">
+            <Link href="/category/earrings" className="hover:text-gray-300">
               Earrings
             </Link>
-            <Link href="#" className="hover:text-gray-300">
+            <Link href="/category/bracelets" className="hover:text-gray-300">
               Bracelets
             </Link>
-            <Link href="#" className="hover:text-gray-300">
+            <Link href="/category/sets" className="hover:text-gray-300">
               Sets
             </Link>
-            <Link href="#" className="hover:text-gray-300">
+            <Link href="/category/anklets" className="hover:text-gray-300">
               Anklets
             </Link>
-            <Link href="#" className="hover:text-gray-300">
+            <Link href="/category/necklaces" className="hover:text-gray-300">
               Necklaces
             </Link>
           </nav>

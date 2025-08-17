@@ -1,18 +1,19 @@
 "use client";
 
-// import { useCart } from "@/context/CartContext";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import CustomerReviews from "../components/CustomerReviews";
 import ProductRecommendationCarousel from "../components/RecommendationCarousel";
 
 export default function ProductDetailPage() {
-  //   const { addToCart } = useCart();
-  const [sortOption, setSortOption] = useState("latest");
-  const [ratingFilter, setRatingFilter] = useState<number | null>(null);
+  const { data: session } = useSession();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [cartQuantity, setCartQuantity] = useState<number | null>(null);
 
-  // Dummy product
   const product = {
-    id: 1,
+    id: "1",
     name: "Elegant Diamond Necklace",
     price: 250.0,
     discount: 50.0,
@@ -21,86 +22,104 @@ export default function ProductDetailPage() {
     mainImage: "https://picsum.photos/seed/23/600/600",
     images: [
       "https://picsum.photos/seed/23/600/600",
-      "https://picsum.photos/seed/23/600/600",
-      "https://picsum.photos/seed/23/600/600",
-      "https://picsum.photos/seed/23/600/600",
-      "https://picsum.photos/seed/23/600/600",
-      "https://picsum.photos/seed/23/600/600",
-      "https://picsum.photos/seed/23/600/600",
-      "https://picsum.photos/seed/23/600/600",
-      "https://picsum.photos/seed/23/600/600",
+      "https://picsum.photos/seed/24/600/600",
+      "https://picsum.photos/seed/25/600/600",
+      "https://picsum.photos/seed/26/600/600",
+      "https://picsum.photos/seed/27/600/600",
+      "https://picsum.photos/seed/28/600/600",
+      "https://picsum.photos/seed/29/600/600",
     ],
   };
 
-  const reviews = [
-    { id: 1, user: "Alice", rating: 5, comment: "Absolutely stunning!" },
-    {
-      id: 2,
-      user: "Bob",
-      rating: 4,
-      comment: "Great quality, worth the price.",
-    },
-    {
-      id: 3,
-      user: "Clara",
-      rating: 3,
-      comment: "Good, but shipping took long.",
-    },
-    { id: 4, user: "Dan", rating: 5, comment: "My wife loved it!" },
-    { id: 5, user: "Eva", rating: 2, comment: "Not as shiny as in photos." },
-  ];
+  const [selectedImage, setSelectedImage] = useState(product.mainImage);
+  const [message, setMessage] = useState<string | null>(null);
+  const [added, setAdded] = useState(false); // 🔑 track if product is added
 
-  const filteredReviews = reviews
-    .filter((r) => (ratingFilter ? r.rating === ratingFilter : true))
-    .sort((a, b) => {
-      if (sortOption === "highest") return b.rating - a.rating;
-      if (sortOption === "lowest") return a.rating - b.rating;
-      return b.id - a.id; // latest
-    });
+  const handleAddToCart = async () => {
+    if (!session) {
+      router.push("/api/auth/signin");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId: product.id }),
+      });
+
+      if (!res.ok) throw new Error("Failed to add to cart");
+
+      await res.json(); // we don’t even need details here
+      setAdded(true); // ✅ mark as added
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleViewCart = () => {
+    router.push("/cart");
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-8">
       {/* Product Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-[70%_30%] gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-[60%_40%] gap-8">
         {/* Images Section */}
         <div>
-          <div className="flex gap-4">
+          <div className="grid grid-cols-[75%_25%] gap-4">
             {/* Main Image */}
-            <div className="aspect-square">
+            <div className="aspect-square relative">
               <img
-                src={product.mainImage}
+                src={selectedImage}
                 alt={product.name}
-                className="w-full h-full object-cover rounded-lg shadow"
+                className="w-full h-full object-cover rounded-lg shadow cursor-pointer"
               />
             </div>
 
-            {/* Two small images */}
-            <div className="flex flex-col gap-4 w-1/2">
-              <div className="aspect-square">
-                <img
-                  src={product.images[0]}
-                  alt="thumb1"
-                  className="w-full h-full object-cover rounded-lg shadow"
-                />
-              </div>
-              <div className="aspect-square">
-                <img
-                  src={product.images[1]}
-                  alt="thumb2"
-                  className="w-full h-full object-cover rounded-lg shadow"
-                />
-              </div>
+            {/* Right thumbnails (3 stacked) */}
+            <div className="flex flex-col gap-4">
+              {product.images.slice(0, 3).map((img, idx) => (
+                <div
+                  key={idx}
+                  className={`w-full aspect-square rounded-lg shadow overflow-hidden border-2 cursor-pointer ${
+                    selectedImage === img
+                      ? "border-blue-600"
+                      : "border-transparent"
+                  }`}
+                  onClick={() => setSelectedImage(img)}
+                >
+                  <img
+                    src={img}
+                    alt={`thumb${idx}`}
+                    className="w-full h-full object-cover hover:opacity-80 transition"
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* More bottom images */}
-          <div className="flex gap-4 mt-4 overflow-x-auto pb-2">
-            {product.images.slice(2).map((img, idx) => (
-              <div key={idx} className="flex-shrink-0 w-1/4 aspect-square">
+          {/* Bottom thumbnails */}
+          <div className="flex gap-4 mt-4 overflow-x-auto pb-2 flex-nowrap">
+            {product.images.slice(3).map((img, idx) => (
+              <div
+                key={idx}
+                className={`flex-shrink-0 w-1/4 aspect-square rounded-lg overflow-hidden shadow cursor-pointer border-2 ${
+                  selectedImage === img
+                    ? "border-blue-600"
+                    : "border-transparent"
+                }`}
+                onClick={() => setSelectedImage(img)}
+                style={{ minWidth: "25%" }}
+              >
                 <img
                   src={img}
                   alt={`thumb${idx}`}
-                  className="w-full h-full object-cover rounded-lg shadow"
+                  className="w-full h-full object-cover hover:opacity-80 transition"
                 />
               </div>
             ))}
@@ -111,7 +130,7 @@ export default function ProductDetailPage() {
         <div className="flex flex-col gap-6">
           <h1 className="text-3xl font-bold">{product.name}</h1>
 
-          {/* Elegant Price Section */}
+          {/* Price Section */}
           <div className="bg-white border rounded-lg shadow p-6 space-y-3">
             <div className="flex justify-between text-lg">
               <span>Price</span>
@@ -129,12 +148,16 @@ export default function ProductDetailPage() {
               </span>
             </div>
 
-            {/* Add to Cart */}
             <button
-              //   onClick={() => addToCart(product.id)}
-              className="mt-4 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+              onClick={added ? handleViewCart : handleAddToCart}
+              disabled={loading}
+              className={`mt-4 w-full py-3 rounded-lg transition font-medium ${
+                added
+                  ? "bg-green-600 text-white hover:bg-green-700"
+                  : "bg-gray-800 text-white hover:bg-gray-700"
+              }`}
             >
-              Add to Cart
+              {loading ? "Adding..." : added ? "View Cart" : "Add to Cart"}
             </button>
           </div>
 
@@ -147,9 +170,9 @@ export default function ProductDetailPage() {
           </div>
         </div>
       </div>
-      {/* Recommendations Section */}
+
+      {/* Recommendations & Reviews */}
       <ProductRecommendationCarousel />
-      {/* Reviews Section */}
       <CustomerReviews />
     </div>
   );

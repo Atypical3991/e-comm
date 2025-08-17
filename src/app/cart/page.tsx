@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 import Link from "next/link";
-import ProductRecommendationCarousel from "../components/RecommendationCarousel";
-import BestSellers from "../components/BestSellers";
+import ProductRecommendationCarousel from "./components/RecommendationCarousel";
+import BestSellers from "./components/BestSellers";
 
 interface CartItem {
   id: number;

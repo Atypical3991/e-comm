@@ -10,6 +10,14 @@ const allProducts: Product[] = Array.from({ length: 50 }, (_, i) => ({
   name: `Product ${i + 1}`,
   price: Math.round(Math.random() * 200) + 20,
   image: `https://picsum.photos/seed/${i + 1}/600/600`,
+  link: `/product/${i + 1}`,
+  description: `Description for Product ${i + 1}`,
+  category: `Category ${Math.ceil((i + 1) / 10)}`,
+  rating: (Math.random() * 5).toFixed(1),
+  stock: Math.floor(Math.random() * 100) + 1,
+  reviews: Math.floor(Math.random() * 50) + 1,
+  brand: `Brand ${Math.ceil((i + 1) / 10)}`,
+  tags: ["new", "sale", "popular"].slice(0, Math.floor(Math.random() * 3) + 1),
 }));
 
 export default function ProductsPage() {

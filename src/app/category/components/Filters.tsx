@@ -1,24 +1,24 @@
 export default function Filters() {
   const categories = [
     {
-      name: "Electronics",
-      subcategories: ["Phones", "Laptops", "Cameras", "Accessories"],
+      name: "Earrings",
+      subcategories: ["Wedding", "Casual Wear", "Ethnic"],
     },
     {
-      name: "Clothing",
-      subcategories: ["Men", "Women", "Kids", "Accessories"],
+      name: "Bracelets",
+      subcategories: ["Wedding", "Casual Wear", "Ethnic"],
     },
     {
-      name: "Home",
-      subcategories: ["Furniture", "Kitchen", "Decor", "Outdoor"],
+      name: "Sets",
+      subcategories: ["Wedding", "Casual Wear", "Ethnic"],
     },
     {
-      name: "Books",
-      subcategories: ["Fiction", "Non-fiction", "Comics", "Education"],
+      name: "Anklets",
+      subcategories: ["Wedding", "Casual Wear", "Ethnic"],
     },
     {
-      name: "Sports",
-      subcategories: ["Fitness", "Outdoor", "Team Sports", "Accessories"],
+      name: "Necklaces",
+      subcategories: ["Wedding", "Casual Wear", "Ethnic"],
     },
   ];
 
